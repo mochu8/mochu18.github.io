@@ -260,6 +260,6 @@ public class Benchmark {
 
 这个测试程序让 2 个队列的可存储的元素数都为 5，开启 1000 个线程进行 `put` 和 `take` 操作，运行后查看总耗时。
 
-![性能对比]({{ "/public/images/2019/01/blockingqueue_benchmark.png" | prepend: site.cdnurl }} "性能对比"){:width="600px"}
+![性能对比]({{ "/public/images/2019/01/blockingqueue_benchmark.png" | relative_url }} "性能对比"){:width="600px"}
 
 可以看出，使用 `synchronized` 的方式性能较差。

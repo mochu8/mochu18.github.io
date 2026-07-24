@@ -16,14 +16,6 @@
  * http://hydejack.github.io
  */
 
-/* Icon font for github, twitter, etc */
-@font-face {
-  font-family: 'icomoon';
-  src: url('https://blog.biezhi.me/public/fonts/icomoon.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /*
  * Sidebar
  *
@@ -155,6 +147,13 @@
   font-size: 2rem;
 }
 
+.sidebar-about>h1 a {
+  display: inline-block;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
 .sidebar-about a:hover {
   text-decoration: none;
 }
@@ -193,6 +192,17 @@
 .sidebar-nav-item:hover {
   background-color: rgba(32, 32, 32, 0.2);
   text-decoration: none;
+}
+
+.sidebar-nav-item.active {
+  background-color: rgba(255, 255, 255, .16);
+}
+
+.sidebar-nav-item:focus-visible,
+.sidebar-social>a:focus-visible,
+#_menu:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 /* Disable the "white glow" that is used to make the laurel wreaths distinct form the background */
@@ -390,6 +400,107 @@
 
 .links {
   line-height: 1.2;
+}
+
+.taxonomy-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 2rem;
+}
+
+.taxonomy-cloud a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .35rem .6rem;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  color: #333 !important;
+}
+
+.taxonomy-cloud a:hover {
+  border-color: currentColor;
+}
+
+.taxonomy-cloud span {
+  color: #777;
+  font-size: .8rem;
+}
+
+.listing-item {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: .75rem;
+  margin-bottom: .4rem;
+}
+
+.listing-item time {
+  font-variant-numeric: tabular-nums;
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-item {
+  padding: 1.25rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+}
+
+.project-item h2 {
+  margin-top: .25rem;
+}
+
+.project-kicker {
+  margin-bottom: 0;
+  color: #777;
+  font-size: .75rem;
+  font-weight: bold;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+  color: #777;
+}
+
+.post-pagination-divide {
+  margin-top: 1.25rem !important;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  color: #777;
+  font-size: .8rem;
+}
+
+@media (max-width: 600px) {
+  .project-list {
+    grid-template-columns: 1fr;
+  }
+
+  .listing-item {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: .75rem;
+  }
+
+  .post-pagination a {
+    float: none;
+    display: block;
+    margin-bottom: .75rem;
+  }
 }
 
 .paginator a,

@@ -28,7 +28,7 @@ tags: ['netty']
 这是《可爱的Netty》的第一章，首先来复习一下计算机网络的一些基本概念，知道这些会让你对网络编程的种种现象会有更清晰的认识，
 因为不论在学习任何技能的时候都会有一个基础点，我们无法罗列所有的概念，会挑出一些重点供大家学习。
 
-<img src="{{ "/public/images/2018/01/basic-noun.png" | prepend: site.cdnurl }}" title="基本名词" alt="基本名词"/>
+<img src="{{ "/public/images/2018/01/basic-noun.png" | relative_url }}" title="基本名词" alt="基本名词"/>
 
 ## 名词解释
 

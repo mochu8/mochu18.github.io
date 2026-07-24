@@ -63,7 +63,7 @@ func (c *Counter) rateLimit() bool {
 
 假设有个用户在第 59 秒的最后几毫秒瞬间发送 200 个请求，当 59 秒结束后 Counter 清零了，他在下一秒的时候又发送 200 个请求。那么在 1 秒钟内这个用户发送了 2 倍的请求，如下图：
 
-<img alt="计数器法" title="计数器法" src="{{ '/public/images/2018/10/counter_bug.png' | prepend: site.cdnurl }}" width="80%" />
+<img alt="计数器法" title="计数器法" src="{{ '/public/images/2018/10/counter_bug.png' | relative_url }}" width="80%" />
 
 这种方式的缺点在于它没有更细粒度的划分临界点，如果我们可以把这个时间窗口划分成 6 份，每一份代表 10 秒，当然你可以将它划分的更细。那么如何解决这里的临界问题呢？来看看下面的滑动窗口吧。
 
@@ -71,13 +71,13 @@ func (c *Counter) rateLimit() bool {
 
 所谓 [滑动窗口（Sliding window）](https://en.wikipedia.org/wiki/Sliding_window_protocol){:target="_blank"} 是一种流量控制技术，这个词出现在 TCP 协议中。我们来看看在限流中它是怎样表现的：
 
-![滑动窗口]({{ "/public/images/2018/10/sliding_window.jpg" | prepend: site.cdnurl }} "滑动窗口")
+![滑动窗口]({{ "/public/images/2018/10/sliding_window.jpg" | relative_url }} "滑动窗口")
 
 上图中我们用红色的虚线代表一个时间窗口（一分钟），每个时间窗口有 6 个格子，每个格子是 10 秒钟。每过 10 秒钟时间窗口向右移动一格，可以看红色箭头的方向。我们为每个格子都设置一个独立的计数器 Counter，假如一个请求在 `0:45` 访问了那么我们将第五个格子的计数器 +1（也是就是 `0:40~0:50`），在判断限流的时候需要把所有格子的计数加起来和设定的频次进行比较即可。
 
 那么滑动窗口如何解决我们上面遇到的问题呢？来看下面的图：
 
-![滑动窗口]({{ "/public/images/2018/10/sliding_window_fix_counter.png" | prepend: site.cdnurl }} "滑动窗口")
+![滑动窗口]({{ "/public/images/2018/10/sliding_window_fix_counter.png" | relative_url }} "滑动窗口")
 
 当用户在 `0:59` 秒钟发送了 200 个请求就会被第六个格子的计数器记录 +200，当下一秒的时候时间窗口向右移动了一个，此时计数器已经记录了该用户发送的 200 个请求，所以再发送的话就会触发限流，则拒绝新的请求。
 
@@ -85,13 +85,13 @@ func (c *Counter) rateLimit() bool {
 
 ### 3. 漏桶算法
 
-![水龙头漏桶]({{ "/public/images/2018/10/leaky_bucket.jpeg" | prepend: site.cdnurl }} "水龙头漏桶")
+![水龙头漏桶]({{ "/public/images/2018/10/leaky_bucket.jpeg" | relative_url }} "水龙头漏桶")
 
 漏桶算法（Leaky Bucket）是什么呢？大家都用过水龙头，打开龙头开关水就会流下滴到水桶里，而漏桶指的是水桶下面有个漏洞可以出水。如果水龙头开的特别大那么水流速就会过大，这样就可能导致水桶的水满了然后溢出。
 
 而我们讨论的漏桶算法的思路也很简单，水龙头打开后流下的水（请求）以一定的速率流到漏桶里（限流容器），漏桶以一定的速度出水（接口响应速率），如果水流速度过大（请求过多）就可能会导致漏桶的水溢出（访问频率超过接口响应速率），这时候我们需要关掉水龙头（拒绝请求），下面是经典的漏桶算法图示：
 
-![漏桶算法]({{ "/public/images/2018/10/leaky_bucket_algorithm.png" | prepend: site.cdnurl }} "漏桶算法")
+![漏桶算法]({{ "/public/images/2018/10/leaky_bucket_algorithm.png" | relative_url }} "漏桶算法")
 
 这张图中有 2 个变量，一个是桶的大小（capacity），另一个是水桶漏洞的大小（rate），那么我们可以写下如下代码来实现：
 
@@ -143,7 +143,7 @@ func max(a int64, b int64) int64 {
 
 令牌桶算法（Token Bucket）是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。
 
-![令牌桶算法]({{ "/public/images/2018/10/token_bucket.jpg" | prepend: site.cdnurl }} "令牌桶算法")
+![令牌桶算法]({{ "/public/images/2018/10/token_bucket.jpg" | relative_url }} "令牌桶算法")
 
 令牌桶算法和漏桶算法的方向刚好是相反的，我们有一个固定的桶，桶里存放着令牌（token）。一开始桶是空的，系统按固定的时间（rate）往桶里添加令牌，直到桶里的令牌数满，多余的请求会被丢弃。当请求来的时候，从桶里移除一个令牌，如果桶是空的则拒绝请求或者阻塞。
 

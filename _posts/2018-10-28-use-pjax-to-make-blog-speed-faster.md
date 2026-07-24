@@ -10,7 +10,7 @@ tags: ['博客']
 
 ## 什么是 pjax？
 
-![pjax]({{ "/public/images/2018/10/pjax.png" | prepend: site.cdnurl }} "pjax")
+![pjax]({{ "/public/images/2018/10/pjax.png" | relative_url }} "pjax")
 
 ajax 可以实现网站的局部刷新，但是 ajax 不会修改网站的 URL，它主要是为了异步的获取某个资源（可能是一段 JSON 或者一个页面）。很多人可能都听过目前流行的 `SPA`（Single Page Application）开发，它可以实现加载单个 HTML 页面并在用户与应用交互时动态更新该页面的内容，页面不会刷新；切换页面时 URL 会发生改变，这样比起刷新整个页面的体验要好的多，一般使用 MVVM 框架来实现这种单页应用，比如流行的 Vue.js。
 
@@ -60,7 +60,7 @@ $(window).on('popstate', function (e) {
 
 [在线演示](https://codepen.io/biezhi/project/editor/XrMgdd){:target="_blank"}
 
-![pjax 简易版]({{ "/public/images/2018/10/simple_pjax_demo.png" | prepend: site.cdnurl }} "pjax 简易版")
+![pjax 简易版]({{ "/public/images/2018/10/simple_pjax_demo.png" | relative_url }} "pjax 简易版")
 
 用户点击链接会修改当前 URL，通过 `history.pushState` 压入历史浏览堆栈，按下后退按钮后会触发 `window.popstate`，弹出上一次访问替换掉内容即可。
 

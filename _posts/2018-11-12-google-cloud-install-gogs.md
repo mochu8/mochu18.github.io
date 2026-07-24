@@ -20,9 +20,9 @@ tags: ["git", "vps"]
 
 首先在 `Compute Engine -> 元数据` 选项里添加自己的 SSH 公钥。
 
-<img src='{{ "/public/images/2018/11/gcp_meta_data.png" | prepend: site.cdnurl }}'  alt="gcp meta data" width="400px"/>
+<img src='{{ "/public/images/2018/11/gcp_meta_data.png" | relative_url }}'  alt="gcp meta data" width="400px"/>
 
-![gcp 添加公钥]({{ "/public/images/2018/11/gcp_add_rsa_pub.png" | prepend: site.cdnurl }} "gcp 添加公钥")
+![gcp 添加公钥]({{ "/public/images/2018/11/gcp_add_rsa_pub.png" | relative_url }} "gcp 添加公钥")
 
 将自己的公钥帖进去保存即可：
 
@@ -35,7 +35,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAvTjxXeOkDBmYl9BCcdKqYA1Cw6EjxKr58MVJNIIjzPGc0dCpt2CDe9q
 
 这时候就可以在本地登陆了，用户名不是 ROOT，而是你刚才添加 SSH 公钥后左边的这个用户名
 
-![gcp meta data]({{ "/public/images/2018/11/gcp_login_name.png" | prepend: site.cdnurl }} "gcp meta data")
+![gcp meta data]({{ "/public/images/2018/11/gcp_login_name.png" | relative_url }} "gcp meta data")
 
 所以我们要这样登陆
 
@@ -67,7 +67,7 @@ cd lnmp && screen -S lnmp
 
 然后访问 `http://IP` 会看到这个界面：
 
-![gcp meta data]({{ "/public/images/2018/11/lnmp_web.png" | prepend: site.cdnurl }} "gcp meta data")
+![gcp meta data]({{ "/public/images/2018/11/lnmp_web.png" | relative_url }} "gcp meta data")
 
 在左侧的菜单中点击可以看到各个脚本的操作指南。
 
@@ -125,7 +125,7 @@ cd gogs
 
 访问 `http://ip:3000` 你应该可以看到这个界面：
 
-![Gogs 安装]({{ "/public/images/2018/11/gogs_install.png" | prepend: site.cdnurl }} "Gogs 安装")
+![Gogs 安装]({{ "/public/images/2018/11/gogs_install.png" | relative_url }} "Gogs 安装")
 
 到这里证明我们的 Gogs 运行没问题了，有域名的话这里先别安装。
 
@@ -190,7 +190,7 @@ Gogs 支持多种数据库，我这里偷懒没有装 MySQL 直接用的 SQLite�
 
 如果你准备了邮件服务器的话可以配置这里，当然这个配置以后也可以修改的，假设你使用的是 163 的邮箱。
 
-<img src='{{ "/public/images/2018/11/gogs_smtp.png" | prepend: site.cdnurl }}'  alt="Gogs SMTP" width="600px"/>
+<img src='{{ "/public/images/2018/11/gogs_smtp.png" | relative_url }}'  alt="Gogs SMTP" width="600px"/>
 
 注册 Gogs 的第一个用户就是管理员！
 

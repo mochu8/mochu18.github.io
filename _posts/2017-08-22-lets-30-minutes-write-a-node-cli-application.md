@@ -2,7 +2,7 @@
 layout: post
 title: 30 分钟使用 Node 实现一个命令行程序
 toc: true
-cover: /public/images/cover/build-node-cli-30-minutes.jpg
+cover: /public/images/cover/lets-30-minutes-write-a-node-cli-application.jpg
 tags: ['nodejs', '命令行']
 ---
 
@@ -262,7 +262,7 @@ cmd.version(appInfo.version)
 
 我准备了 `animals.txt` 里面存放的是ascii的动物图像，像这样：
 
-![lowb终端程序]({{ "/public/images/2017/08/599c2b7050c5c.png" | prepend: site.cdnurl }} "lowb终端程序")
+![lowb终端程序]({{ "/public/images/2017/08/599c2b7050c5c.png" | relative_url }} "lowb终端程序")
 
 如果觉得这些你不喜欢可以上 [这里](http://www.asciiworld.com/-Animals-.html){:target="_blank"} 看看还有更多的小动物任你把玩。
 

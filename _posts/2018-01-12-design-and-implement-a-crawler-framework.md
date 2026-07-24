@@ -13,7 +13,7 @@ tags: ['框架设计', '爬虫']
 
 我把这个爬虫框架的源码放在 [github](https://github.com/biezhi/elves){:target="_blank"} 上，里面有几个例子可以运行。
 
-![网络爬虫]({{ "/public/images/2018/01/animation_graphics.png" | prepend: site.cdnurl }} "网络爬虫")
+![网络爬虫]({{ "/public/images/2018/01/animation_graphics.png" | relative_url }} "网络爬虫")
 
 ## 关于爬虫的一切
 
@@ -161,7 +161,7 @@ public class Reptile {
 
 ### 架构图
 
-<img src="{{ "/public/images/2018/01/elves.png" | prepend: site.cdnurl }}" alt="Elves架构图" title="Elves架构图"/>
+<img src="{{ "/public/images/2018/01/elves.png" | relative_url }}" alt="Elves架构图" title="Elves架构图"/>
 
 整个流程和 Scrapy 是一致的，但简化了一些操作
 
@@ -176,7 +176,7 @@ public class Reptile {
 
 **执行流程图**
 
-<img src="{{ "/public/images/2018/01/dispatch.png" | prepend: site.cdnurl }}" alt="Elves执行流程图" title="Elves执行流程图"/>
+<img src="{{ "/public/images/2018/01/dispatch.png" | relative_url }}" alt="Elves执行流程图" title="Elves执行流程图"/>
 
 1. 首先，引擎从调度器中取出一个链接(URL)用于接下来的抓取
 2. 引擎把URL封装成一个请求(Request)传给下载器，下载器把资源下载下来，并封装成应答包(Response)

@@ -163,11 +163,11 @@ sudo certbot renew --dry-run
 
 第一次打开会看到这个界面
 
-![Rocket.Chat 设置]({{ "/public/images/2018/11/rocketchat01.png" | prepend: site.cdnurl }} "Rocket.Chat 设置")
+![Rocket.Chat 设置]({{ "/public/images/2018/11/rocketchat01.png" | relative_url }} "Rocket.Chat 设置")
 
 这里需要设置一下管理员信息，成功后就可以登录啦！
 
-![Rocket.Chat 登录]({{ "/public/images/2018/11/rocketchat02.png" | prepend: site.cdnurl }} "Rocket.Chat 登录")
+![Rocket.Chat 登录]({{ "/public/images/2018/11/rocketchat02.png" | relative_url }} "Rocket.Chat 登录")
 
 好了，到这里已经安装完毕了，Rocket.Chat 的更多有趣的玩法需要你自己体验，起飞吧少年！
 

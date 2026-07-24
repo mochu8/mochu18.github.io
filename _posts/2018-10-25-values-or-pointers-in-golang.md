@@ -10,7 +10,7 @@ tags: ['golang']
 
 ## 基础概念
 
-![值类型和引用类型]({{ "/public/images/2018/10/values_reference_types.png" | prepend: site.cdnurl }} "值类型和引用类型")
+![值类型和引用类型]({{ "/public/images/2018/10/values_reference_types.png" | relative_url }} "值类型和引用类型")
 
 这幅图中展示了常用的值类型和引用类型（引用类型和传引用是两个概念）。在左边是我们常用的一些值类型，函数调用时需要使用指针修改底层数据；而右边是“引用类型”，我们可以理解为它们的底层都是指针类型，所以右边的类型在使用的时候会有些不同，下文中会举例说明。
 

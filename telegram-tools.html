@@ -1,392 +1,626 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram 机器人工具箱</title>
-    <script src="/js/jquery.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .tool-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-        }
-        .tool-card:hover {
-            transform: translateY(-5px);
-        }
-        .tool-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .tool-icon {
-            font-size: 1.8em;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: 500;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        button:hover {
-            opacity: 0.9;
-        }
-        .result {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            display: none;
-        }
-        .result.show {
-            display: block;
-        }
-        .copy-btn {
-            background: #4CAF50;
-            padding: 8px 20px;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-        .footer {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            margin-top: 30px;
-        }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .tab {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .tab.active {
-            background: white;
-            color: #667eea;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Telegram Bot Token、Webhook、消息转义和内联键盘工具。">
+  <meta name="theme-color" content="#176b87">
+  <title>Telegram 机器人工具箱</title>
+  <link rel="icon" type="image/jpeg" href="/public/images/avatar-mochu8.jpg">
+  <style>
+    :root {
+      color-scheme: light;
+      --accent: #176b87;
+      --accent-dark: #0e5068;
+      --background: #f4f6f8;
+      --surface: #ffffff;
+      --border: #d7dde2;
+      --text: #182026;
+      --muted: #66727c;
+      --success: #247a4a;
+      --error: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--background);
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--background);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    .app-header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .header-inner,
+    main,
+    .site-footer {
+      width: min(100% - 2rem, 880px);
+      margin-inline: auto;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      gap: 1rem;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.25;
+    }
+
+    .back-link {
+      white-space: nowrap;
+      font-size: .9rem;
+      text-decoration: none;
+    }
+
+    main {
+      padding-block: 2rem 3rem;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .tab {
+      min-height: 44px;
+      padding: .6rem .75rem;
+      border: 0;
+      border-right: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .tab:last-child {
+      border-right: 0;
+    }
+
+    .tab[aria-selected="true"] {
+      color: #fff;
+      background: var(--accent);
+      font-weight: 600;
+    }
+
+    .tab:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(23, 107, 135, .28);
+      outline-offset: 2px;
+    }
+
+    .tab-panel {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .tab-panel[hidden] {
+      display: none;
+    }
+
+    .tool-title {
+      margin: 0 0 1.25rem;
+      font-size: 1.25rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: .35rem;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: .7rem .75rem;
+      border: 1px solid #aeb8c0;
+      border-radius: 4px;
+      color: var(--text);
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: .5rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .checkbox-row input {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+    }
+
+    .button {
+      min-height: 42px;
+      padding: .55rem 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      color: #fff;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .button.secondary {
+      color: var(--accent-dark);
+      background: #fff;
+    }
+
+    .result {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-left: 4px solid var(--success);
+      background: #f1f8f4;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result.error {
+      border-left-color: var(--error);
+      color: #7a271a;
+      background: #fff3f1;
+    }
+
+    .result-title {
+      margin: 0 0 .75rem;
+      font-weight: 700;
+    }
+
+    .result-row {
+      margin-bottom: .85rem;
+    }
+
+    .result-row:last-child {
+      margin-bottom: 0;
+    }
+
+    code,
+    pre {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    }
+
+    code {
+      overflow-wrap: anywhere;
+    }
+
+    pre {
+      margin: .5rem 0 0;
+      padding: .75rem;
+      overflow: auto;
+      border: 1px solid var(--border);
+      background: #fff;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .copy-button {
+      margin-top: .55rem;
+      min-height: 36px;
+      padding: .35rem .7rem;
+      border: 1px solid #9aa6ae;
+      border-radius: 4px;
+      color: var(--text);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .copy-button:hover {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-block: 1.25rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      max-width: calc(100% - 2rem);
+      padding: .65rem .9rem;
+      border-radius: 4px;
+      color: #fff;
+      background: #263238;
+      opacity: 0;
+      transform: translateY(.5rem);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-block: .8rem;
+      }
+
+      .tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tab:nth-child(2) {
+        border-right: 0;
+      }
+
+      .tab:nth-child(-n+2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .tab-panel {
+        padding: 1rem;
+      }
+
+      .site-footer {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🤖 Telegram 机器人工具箱</h1>
-        
-        <div class="tabs">
-            <div class="tab active" data-tab="token">Token 解析</div>
-            <div class="tab" data-tab="webhook">Webhook 测试</div>
-            <div class="tab" data-tab="message">消息格式化</div>
-            <div class="tab" data-tab="keyboard">键盘生成器</div>
-        </div>
+  <header class="app-header">
+    <div class="header-inner">
+      <h1 class="brand">Telegram 机器人工具箱</h1>
+      <a class="back-link" href="/projects.html">返回项目页</a>
+    </div>
+  </header>
 
-        <!-- Token 解析工具 -->
-        <div class="tab-content active" id="token">
-            <div class="tool-card">
-                <div class="tool-title">
-                    <span class="tool-icon">🔑</span>
-                    Bot Token 解析器
-                </div>
-                <div class="input-group">
-                    <label>输入 Bot Token:</label>
-                    <input type="text" id="botToken" placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz">
-                </div>
-                <button onclick="parseToken()">解析 Token</button>
-                <div class="result" id="tokenResult"></div>
-            </div>
-        </div>
-
-        <!-- Webhook 测试工具 -->
-        <div class="tab-content" id="webhook">
-            <div class="tool-card">
-                <div class="tool-title">
-                    <span class="tool-icon">🪝</span>
-                    Webhook 测试器
-                </div>
-                <div class="input-group">
-                    <label>Webhook URL:</label>
-                    <input type="text" id="webhookUrl" placeholder="https://your-domain.com/webhook">
-                </div>
-                <div class="input-group">
-                    <label>Bot Token:</label>
-                    <input type="text" id="webhookToken" placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz">
-                </div>
-                <button onclick="testWebhook()">测试 Webhook</button>
-                <div class="result" id="webhookResult"></div>
-            </div>
-        </div>
-
-        <!-- 消息格式化工具 -->
-        <div class="tab-content" id="message">
-            <div class="tool-card">
-                <div class="tool-title">
-                    <span class="tool-icon">✍️</span>
-                    消息格式化工具
-                </div>
-                <div class="input-group">
-                    <label>原始文本:</label>
-                    <textarea id="originalText" placeholder="输入你要格式化的文本..."></textarea>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <button onclick="formatMarkdown()">Markdown</button>
-                    <button onclick="formatHTML()">HTML</button>
-                    <button onclick="escapeText()">转义特殊字符</button>
-                </div>
-                <div class="result" id="messageResult"></div>
-            </div>
-        </div>
-
-        <!-- 键盘生成器 -->
-        <div class="tab-content" id="keyboard">
-            <div class="tool-card">
-                <div class="tool-title">
-                    <span class="tool-icon">⌨️</span>
-                    内联键盘生成器
-                </div>
-                <div class="input-group">
-                    <label>按钮配置 (每行一个按钮，格式: 文本|回调数据):</label>
-                    <textarea id="keyboardConfig" placeholder="按钮1|callback_1
-按钮2|callback_2
-按钮3|callback_3"></textarea>
-                </div>
-                <button onclick="generateKeyboard()">生成键盘 JSON</button>
-                <div class="result" id="keyboardResult"></div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Made with ❤️ by OpenClaw | 安全漏洞已修复: jQuery 3.7.1</p>
-        </div>
+  <main>
+    <div class="tabs" role="tablist" aria-label="工具类型">
+      <button class="tab" id="tab-token" type="button" role="tab" aria-selected="true" aria-controls="panel-token" data-panel="panel-token">Token 解析</button>
+      <button class="tab" id="tab-webhook" type="button" role="tab" aria-selected="false" aria-controls="panel-webhook" data-panel="panel-webhook" tabindex="-1">Webhook</button>
+      <button class="tab" id="tab-message" type="button" role="tab" aria-selected="false" aria-controls="panel-message" data-panel="panel-message" tabindex="-1">消息转义</button>
+      <button class="tab" id="tab-keyboard" type="button" role="tab" aria-selected="false" aria-controls="panel-keyboard" data-panel="panel-keyboard" tabindex="-1">键盘 JSON</button>
     </div>
 
-    <script>
-        // 标签页切换
-        $('.tab').click(function() {
-            $('.tab').removeClass('active');
-            $('.tab-content').removeClass('active');
-            $(this).addClass('active');
-            $('#' + $(this).data('tab')).addClass('active');
-        });
+    <section class="tab-panel" id="panel-token" role="tabpanel" aria-labelledby="tab-token">
+      <h2 class="tool-title">Bot Token 解析</h2>
+      <div class="input-group">
+        <label for="bot-token">Bot Token</label>
+        <input type="password" id="bot-token" placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz" autocomplete="off" spellcheck="false">
+        <div class="checkbox-row">
+          <input type="checkbox" id="show-bot-token" data-toggle-password="bot-token">
+          <label for="show-bot-token">显示 Token</label>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="button" type="button" id="parse-token">解析 Token</button>
+      </div>
+      <div class="result" id="token-result" role="status" aria-live="polite"></div>
+    </section>
 
-        // Token 解析
-        function parseToken() {
-            const token = $('#botToken').val().trim();
-            if (!token) {
-                showResult('tokenResult', '请输入 Bot Token', 'error');
-                return;
-            }
+    <section class="tab-panel" id="panel-webhook" role="tabpanel" aria-labelledby="tab-webhook" hidden>
+      <h2 class="tool-title">Webhook 请求生成</h2>
+      <div class="input-group">
+        <label for="webhook-url">Webhook URL</label>
+        <input type="url" id="webhook-url" placeholder="https://example.com/webhook" inputmode="url" autocomplete="url">
+      </div>
+      <div class="input-group">
+        <label for="webhook-token">Bot Token</label>
+        <input type="password" id="webhook-token" placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz" autocomplete="off" spellcheck="false">
+        <div class="checkbox-row">
+          <input type="checkbox" id="show-webhook-token" data-toggle-password="webhook-token">
+          <label for="show-webhook-token">显示 Token</label>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="button" type="button" id="build-webhook">生成请求</button>
+      </div>
+      <div class="result" id="webhook-result" role="status" aria-live="polite"></div>
+    </section>
 
-            const parts = token.split(':');
-            if (parts.length !== 2) {
-                showResult('tokenResult', 'Token 格式不正确', 'error');
-                return;
-            }
+    <section class="tab-panel" id="panel-message" role="tabpanel" aria-labelledby="tab-message" hidden>
+      <h2 class="tool-title">消息文本转义</h2>
+      <div class="input-group">
+        <label for="message-input">原始文本</label>
+        <textarea id="message-input" placeholder="输入需要处理的文本" spellcheck="false"></textarea>
+      </div>
+      <div class="actions">
+        <button class="button" type="button" id="escape-markdown">MarkdownV2</button>
+        <button class="button secondary" type="button" id="escape-html">HTML</button>
+        <button class="button secondary" type="button" id="escape-json">JSON</button>
+      </div>
+      <div class="result" id="message-result" role="status" aria-live="polite"></div>
+    </section>
 
-            const botId = parts[0];
-            const secret = parts[1];
-            
-            let html = `<strong>✅ Token 解析成功</strong><br><br>`;
-            html += `<strong>Bot ID:</strong> ${botId}<br>`;
-            html += `<strong>Secret:</strong> ${secret.substring(0, 10)}...<br>`;
-            html += `<strong>获取 Bot 信息:</strong><br>`;
-            html += `<code>https://api.telegram.org/bot${token}/getMe</code><br><br>`;
-            html += `<button class="copy-btn" onclick="copyToClipboard('https://api.telegram.org/bot${token}/getMe')">复制 API URL</button>`;
-            
-            showResult('tokenResult', html);
+    <section class="tab-panel" id="panel-keyboard" role="tabpanel" aria-labelledby="tab-keyboard" hidden>
+      <h2 class="tool-title">内联键盘 JSON</h2>
+      <div class="input-group">
+        <label for="keyboard-input">按钮配置</label>
+        <textarea id="keyboard-input" placeholder="按钮 1|callback_1&#10;按钮 2|callback_2" spellcheck="false"></textarea>
+      </div>
+      <div class="actions">
+        <button class="button" type="button" id="build-keyboard">生成 JSON</button>
+      </div>
+      <div class="result" id="keyboard-result" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 mochu8</span>
+    <a href="https://github.com/mochu8/mochu8.github.io" target="_blank" rel="noopener noreferrer">网站源码</a>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function activateTab(tab) {
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.setAttribute("aria-selected", String(active));
+        item.tabIndex = active ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.id !== tab.dataset.panel;
+      });
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => activateTab(tab));
+      tab.addEventListener("keydown", (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let nextIndex = index;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+        activateTab(tabs[nextIndex]);
+        tabs[nextIndex].focus();
+      });
+    });
+
+    document.querySelectorAll('[data-toggle-password]').forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const input = document.getElementById(checkbox.dataset.togglePassword);
+        input.type = checkbox.checked ? "text" : "password";
+      });
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("已复制");
+      } catch (error) {
+        showToast("复制失败，请手动选择文本");
+      }
+    }
+
+    function resetResult(result, title, isError = false) {
+      result.replaceChildren();
+      result.className = isError ? "result show error" : "result show";
+      const heading = document.createElement("p");
+      heading.className = "result-title";
+      heading.textContent = title;
+      result.appendChild(heading);
+    }
+
+    function showError(result, message) {
+      resetResult(result, message, true);
+    }
+
+    function appendTextRow(result, label, value) {
+      const row = document.createElement("div");
+      row.className = "result-row";
+      const strong = document.createElement("strong");
+      strong.textContent = label + "：";
+      row.append(strong, document.createTextNode(value));
+      result.appendChild(row);
+    }
+
+    function appendCodeRow(result, label, displayValue, copyValue) {
+      const row = document.createElement("div");
+      row.className = "result-row";
+      const strong = document.createElement("strong");
+      strong.textContent = label;
+      const code = document.createElement("pre");
+      code.textContent = displayValue;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "copy-button";
+      button.textContent = "复制";
+      button.addEventListener("click", () => copyText(copyValue));
+      row.append(strong, code, button);
+      result.appendChild(row);
+    }
+
+    function validToken(token) {
+      return /^\d+:[A-Za-z0-9_-]{20,}$/.test(token);
+    }
+
+    document.getElementById("parse-token").addEventListener("click", () => {
+      const token = document.getElementById("bot-token").value.trim();
+      const result = document.getElementById("token-result");
+      if (!validToken(token)) {
+        showError(result, "Token 格式不正确");
+        return;
+      }
+      const [botId, secret] = token.split(":", 2);
+      const url = `https://api.telegram.org/bot${token}/getMe`;
+      const maskedUrl = `https://api.telegram.org/bot${botId}:${secret.slice(0, 4)}.../getMe`;
+      resetResult(result, "Token 格式有效");
+      appendTextRow(result, "Bot ID", botId);
+      appendTextRow(result, "Secret", `${secret.slice(0, 4)}...${secret.slice(-4)}`);
+      appendCodeRow(result, "getMe 请求", maskedUrl, url);
+    });
+
+    document.getElementById("build-webhook").addEventListener("click", () => {
+      const rawUrl = document.getElementById("webhook-url").value.trim();
+      const token = document.getElementById("webhook-token").value.trim();
+      const result = document.getElementById("webhook-result");
+      if (!validToken(token)) {
+        showError(result, "Token 格式不正确");
+        return;
+      }
+      let webhookUrl;
+      try {
+        webhookUrl = new URL(rawUrl);
+      } catch (error) {
+        showError(result, "Webhook URL 格式不正确");
+        return;
+      }
+      if (webhookUrl.protocol !== "https:") {
+        showError(result, "Webhook URL 必须使用 HTTPS");
+        return;
+      }
+      const base = `https://api.telegram.org/bot${token}`;
+      const maskedBase = `https://api.telegram.org/bot${token.split(':')[0]}:...`;
+      const requests = [
+        ["设置 Webhook", `${base}/setWebhook?url=${encodeURIComponent(webhookUrl.href)}`, `${maskedBase}/setWebhook?url=${encodeURIComponent(webhookUrl.href)}`],
+        ["查看 Webhook", `${base}/getWebhookInfo`, `${maskedBase}/getWebhookInfo`],
+        ["删除 Webhook", `${base}/deleteWebhook`, `${maskedBase}/deleteWebhook`]
+      ];
+      resetResult(result, "请求已生成");
+      requests.forEach(([label, value, display]) => appendCodeRow(result, label, display, value));
+    });
+
+    function renderMessageResult(label, value) {
+      const result = document.getElementById("message-result");
+      if (!document.getElementById("message-input").value) {
+        showError(result, "请输入需要处理的文本");
+        return;
+      }
+      resetResult(result, label);
+      appendCodeRow(result, "结果", value, value);
+    }
+
+    document.getElementById("escape-markdown").addEventListener("click", () => {
+      const value = document.getElementById("message-input").value.replace(/([_*\[\]()~`>#+\-=|{}.!])/g, "\\$1");
+      renderMessageResult("MarkdownV2 转义完成", value);
+    });
+
+    document.getElementById("escape-html").addEventListener("click", () => {
+      const value = document.getElementById("message-input").value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;");
+      renderMessageResult("HTML 转义完成", value);
+    });
+
+    document.getElementById("escape-json").addEventListener("click", () => {
+      const value = JSON.stringify(document.getElementById("message-input").value);
+      renderMessageResult("JSON 转义完成", value);
+    });
+
+    document.getElementById("build-keyboard").addEventListener("click", () => {
+      const raw = document.getElementById("keyboard-input").value.trim();
+      const result = document.getElementById("keyboard-result");
+      if (!raw) {
+        showError(result, "请输入按钮配置");
+        return;
+      }
+      const rows = [];
+      for (const line of raw.split(/\r?\n/)) {
+        if (!line.trim()) continue;
+        const separator = line.indexOf("|");
+        if (separator < 1 || separator === line.length - 1) {
+          showError(result, `配置格式不正确：${line}`);
+          return;
         }
-
-        // Webhook 测试
-        function testWebhook() {
-            const url = $('#webhookUrl').val().trim();
-            const token = $('#webhookToken').val().trim();
-            
-            if (!url || !token) {
-                showResult('webhookResult', '请填写完整信息', 'error');
-                return;
-            }
-
-            let html = `<strong>📡 Webhook 配置命令</strong><br><br>`;
-            html += `<strong>设置 Webhook:</strong><br>`;
-            html += `<code>https://api.telegram.org/bot${token}/setWebhook?url=${encodeURIComponent(url)}</code><br><br>`;
-            html += `<strong>删除 Webhook:</strong><br>`;
-            html += `<code>https://api.telegram.org/bot${token}/deleteWebhook</code><br><br>`;
-            html += `<strong>查看 Webhook 信息:</strong><br>`;
-            html += `<code>https://api.telegram.org/bot${token}/getWebhookInfo</code><br><br>`;
-            html += `<button class="copy-btn" onclick="copyToClipboard('https://api.telegram.org/bot${token}/setWebhook?url=${encodeURIComponent(url)}')">复制设置命令</button>`;
-            
-            showResult('webhookResult', html);
+        const text = line.slice(0, separator).trim();
+        const callbackData = line.slice(separator + 1).trim();
+        if (new TextEncoder().encode(callbackData).length > 64) {
+          showError(result, `回调数据超过 64 字节：${text}`);
+          return;
         }
-
-        // Markdown 格式化
-        function formatMarkdown() {
-            let text = $('#originalText').val();
-            if (!text) return;
-
-            // 转义特殊字符
-            text = text.replace(/([_\*\[\]\(\)~`>#+\-=|{}.!])/g, '\\$1');
-            
-            let html = `<strong>📝 Markdown 转义结果</strong><br><br>`;
-            html += `<pre>${text}</pre><br>`;
-            html += `<button class="copy-btn" onclick="copyToClipboard($('#originalText').val())">复制原始文本</button>`;
-            html += `<button class="copy-btn" onclick="copyToClipboard('${text.replace(/'/g, "\\'")}')">复制转义后文本</button>`;
-            
-            showResult('messageResult', html);
-        }
-
-        // HTML 格式化
-        function formatHTML() {
-            let text = $('#originalText').val();
-            if (!text) return;
-
-            // 转义 HTML 特殊字符
-            text = text.replace(/&/g, '&amp;')
-                       .replace(/</g, '&lt;')
-                       .replace(/>/g, '&gt;')
-                       .replace(/"/g, '&quot;');
-            
-            let html = `<strong>🌐 HTML 转义结果</strong><br><br>`;
-            html += `<pre>${text}</pre><br>`;
-            html += `<button class="copy-btn" onclick="copyToClipboard('${text.replace(/'/g, "\\'")}')">复制转义后文本</button>`;
-            
-            showResult('messageResult', html);
-        }
-
-        // 转义特殊字符
-        function escapeText() {
-            let text = $('#originalText').val();
-            if (!text) return;
-
-            // 转义所有特殊字符
-            const escaped = JSON.stringify(text);
-            
-            let html = `<strong>🔒 JSON 转义结果</strong><br><br>`;
-            html += `<pre>${escaped}</pre><br>`;
-            html += `<button class="copy-btn" onclick="copyToClipboard(${escaped})">复制转义后文本</button>`;
-            
-            showResult('messageResult', html);
-        }
-
-        // 生成键盘 JSON
-        function generateKeyboard() {
-            const config = $('#keyboardConfig').val().trim();
-            if (!config) {
-                showResult('keyboardResult', '请输入键盘配置', 'error');
-                return;
-            }
-
-            const lines = config.split('\n');
-            const buttons = [];
-            
-            lines.forEach(line => {
-                const parts = line.split('|');
-                if (parts.length >= 2) {
-                    buttons.push({
-                        text: parts[0].trim(),
-                        callback_data: parts[1].trim()
-                    });
-                }
-            });
-
-            const keyboard = {
-                inline_keyboard: [buttons]
-            };
-
-            const jsonStr = JSON.stringify(keyboard, null, 2);
-            
-            let html = `<strong>⌨️ 生成的键盘 JSON</strong><br><br>`;
-            html += `<pre>${jsonStr}</pre><br>`;
-            html += `<button class="copy-btn" onclick='copyToClipboard(${JSON.stringify(jsonStr)})'>复制 JSON</button>`;
-            
-            showResult('keyboardResult', html);
-        }
-
-        // 显示结果
-        function showResult(id, content, type = 'success') {
-            const $result = $('#' + id);
-            $result.html(content).addClass('show');
-            if (type === 'error') {
-                $result.css('background', '#ffebee');
-                $result.css('color', '#c62828');
-            } else {
-                $result.css('background', '#f5f5f5');
-                $result.css('color', '#333');
-            }
-        }
-
-        // 复制到剪贴板
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('已复制到剪贴板！');
-            }).catch(err => {
-                console.error('复制失败:', err);
-            });
-        }
-    </script>
+        rows.push([{ text, callback_data: callbackData }]);
+      }
+      const value = JSON.stringify({ inline_keyboard: rows }, null, 2);
+      resetResult(result, "键盘 JSON 已生成");
+      appendCodeRow(result, "结果", value, value);
+    });
+  </script>
 </body>
 </html>

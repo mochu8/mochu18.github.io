@@ -11,38 +11,38 @@ tags: ['chrome']
 
 <!-- more -->
 
-![ABP-Block]({{ "/public/images/2017/07/abp-block.png" | prepend: site.cdnurl }} "ABP-Block")
+![ABP-Block]({{ "/public/images/2017/07/abp-block.png" | relative_url }} "ABP-Block")
 
 -----
 
-![draw作图应用]({{ "/public/images/2017/07/draw-io.png" | prepend: site.cdnurl }} "draw作图应用")
+![draw作图应用]({{ "/public/images/2017/07/draw-io.png" | relative_url }} "draw作图应用")
 
 > draw.io 是一款免费的在线图表编辑工具, 可以用来编辑工作流, BPM, org charts, UML, ER图, 网络拓朴图等。
 
 [商店地址](https://chrome.google.com/webstore/detail/pebppomjfocnoigkeepgbmcifnnlndla){:target="_blank"}
 
-![Postman]({{ "/public/images/2017/07/chrome-ext-postman.png" | prepend: site.cdnurl }} "Postman")
+![Postman]({{ "/public/images/2017/07/chrome-ext-postman.png" | relative_url }} "Postman")
 
 > Postman 可以帮助你更有效的针对API工作。Postman是一个scratch-your-own-itch项目。
 > 它需要的是开发者有效的在项目中创建APIS，能够对API测试进行收藏保留。
 
 [商店地址](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop){:target="_blank"}
 
-![Advanced REST client]({{ "/public/images/2017/07/chrome-ext-rest-client.png" | prepend: site.cdnurl }} "Advanced REST client")
+![Advanced REST client]({{ "/public/images/2017/07/chrome-ext-rest-client.png" | relative_url }} "Advanced REST client")
 
 > 网页开发者辅助程序来创建和测试自定义HTTP请求。它是一款非常强大，使用简单的客户端测试工具，得到了程序员的好评。
 > 每周超过50k的开发者使用此应用程序。如此多的人是不会错的！
 
 [商店地址](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo){:target="_blank"}
 
-![JsonView]({{ "/public/images/2017/07/json-view.png" | prepend: site.cdnurl }} "JsonView")
+![JsonView]({{ "/public/images/2017/07/json-view.png" | relative_url }} "JsonView")
 
 > Jsonview 是目前最热门的一款开发者工具插件，确切的来说JSONView是一款非常实用的格式化和语法高亮JSON格式数据查看器jQuery插件。
 它是查看json数据的神器。
 
 [商店地址](https://chrome.google.com/webstore/detail/chklaanhfefbnpoihckbnefhakgolnmc){:target="_blank"}
 
-![Github代码查看]({{ "/public/images/2017/07/octotree-github.png" | prepend: site.cdnurl }} "Github代码查看")
+![Github代码查看]({{ "/public/images/2017/07/octotree-github.png" | relative_url }} "Github代码查看")
 
 > Octotree 是一个 Chrome 扩展，能让你以树形的方式显示 GitHub 项目的目录结构。
 
@@ -54,26 +54,26 @@ tags: ['chrome']
 - 使用 PJAX 的超快代码浏览
 - 支持公有库和私有库
 
-![Pixlr-Today]({{ "/public/images/2017/07/pixlr-today.png" | prepend: site.cdnurl }} "Pixlr-Today")
+![Pixlr-Today]({{ "/public/images/2017/07/pixlr-today.png" | relative_url }} "Pixlr-Today")
 
 > Pixlr Today是一个Chrome新标签页扩展，支持自定义搜索，集成天气，带有备忘与 Todo，还可以每日更换壁纸。
 
 [商店地址](https://chrome.google.com/webstore/detail/pixlr-today/nkgmhpdhaaijoaeaokmhdpfegfmbmfjg){:target="_blank"}
 
-![网站分析利器]({{ "/public/images/2017/07/wappalyzer.png" | prepend: site.cdnurl }} "网站分析利器")
+![网站分析利器]({{ "/public/images/2017/07/wappalyzer.png" | relative_url }} "网站分析利器")
 
 > Wappalyzer 网站是一个可以分析不同网站所使用的各种技术的工具，对于有自身经验的网站开发者而言可以通过代码开分析网站的构架和所采用的技术，
 > 不过现在你可以通过工具来获得网站技术的参数报告了。
 
 [商店地址](https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg){:target="_blank"}
 
-![二维码生成]({{ "/public/images/2017/07/chrome-ext-qrcode.png" | prepend: site.cdnurl }} "二维码生成")
+![二维码生成]({{ "/public/images/2017/07/chrome-ext-qrcode.png" | relative_url }} "二维码生成")
 
 > 使用此插件可以生成当前网址的二维码,手机直接扫二维码就可以访问当前页面。
 
 [商店地址](https://chrome.google.com/webstore/detail/%E4%BA%8C%E7%BB%B4%E7%A0%81qr%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8qr-code-generato/pflgjjogbmmcmfhfcnlohagkablhbpmg){:target="_blank"}
 
-![划词翻译]({{ "/public/images/2017/07/crx-selection-translate.png" | prepend: site.cdnurl }} "划词翻译")
+![划词翻译]({{ "/public/images/2017/07/crx-selection-translate.png" | relative_url }} "划词翻译")
 
 > 让浏览任意语言的网站变得无比轻松的 Chrome 扩展程序。
 
@@ -85,7 +85,7 @@ tags: ['chrome']
 - 支持在 PDF 文档内使用。
 - 支持多种翻译引擎：有道翻译、百度翻译、谷歌翻译（含谷歌中国翻译）、必应词典。
 
-![标签一键保存]({{ "/public/images/2017/07/chrome-ext-tab.png" | prepend: site.cdnurl }} "标签一键保存")
+![标签一键保存]({{ "/public/images/2017/07/chrome-ext-tab.png" | relative_url }} "标签一键保存")
 
 标签一键保存：您必备的标签工具
 
@@ -102,7 +102,7 @@ tags: ['chrome']
 5. 删除指定的标签或标签文件夹
 6. 打开单个标签页
 
-![流量节省程序]({{ "/public/images/2017/07/data-saver.png" | prepend: site.cdnurl }} "流量节省程序")
+![流量节省程序]({{ "/public/images/2017/07/data-saver.png" | relative_url }} "流量节省程序")
 
 > 使用 Google 服务器优化您访问的网页，借此减少流量消耗。
 >

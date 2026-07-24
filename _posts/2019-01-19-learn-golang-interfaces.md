@@ -33,7 +33,7 @@ type Duck interface {
 
 我们见过的鸭子类型可多了去了，下面是你可能见过的：
 
-![鸭子类型]({{ "/public/images/2019/01/duck_types.png" | prepend: site.cdnurl }} "鸭子类型"){:width="80%"}
+![鸭子类型]({{ "/public/images/2019/01/duck_types.png" | relative_url }} "鸭子类型"){:width="80%"}
 
 # 组合接口
 
@@ -104,7 +104,7 @@ duck.Feathers()
 
 由于玩具鸭没有嘎嘎叫的能力，所以如果你这么写编译无法通过
 
-![错误实现]({{ "/public/images/2019/01/interface_error.png" | prepend: site.cdnurl }} "错误实现"){:width="60%"}
+![错误实现]({{ "/public/images/2019/01/interface_error.png" | relative_url }} "错误实现"){:width="60%"}
 
 ---
 

@@ -6,7 +6,7 @@ tags: ["命令行", "Mac"]
 
 如果你觉得当前的终端操作不符合你的气质，可以看看我今天来介绍的 Mac 终端利器，不过不会介绍太多细节操作。
 
-![biezhi iterm]({{ "/public/images/2018/11/biezhi_iterm2.png" | prepend: site.cdnurl }} "biezhi")
+![biezhi iterm]({{ "/public/images/2018/11/biezhi_iterm2.png" | relative_url }} "biezhi")
 
 <!-- more -->
 
@@ -41,11 +41,11 @@ brew cask install iterm2
 
 默认的界面还是略显丑陋的，我们来设置一下代码配色吧。
 
-<img src='{{ "/public/images/2018/11/open_settings.png" | prepend: site.cdnurl }}'  alt="iTerm2 设置" width="400px"/>
+<img src='{{ "/public/images/2018/11/open_settings.png" | relative_url }}'  alt="iTerm2 设置" width="400px"/>
 
 先检查下终端颜色配置为 `xterm-256color`，位置在 `iTerm2 -> Preferences -> Profiles -> Terminal`。
 
-![iTerm2 终端颜色值]({{ "/public/images/2018/11/iterm_terminal_color.png" | prepend: site.cdnurl }} "iTerm2 终端颜色值")
+![iTerm2 终端颜色值]({{ "/public/images/2018/11/iterm_terminal_color.png" | relative_url }} "iTerm2 终端颜色值")
 
 然后就可以设置配色了，默认情况下 `iTerm2` 只有 7 种自带的配色，当然满足不了我们高颜值的需求了。有人就开源了一款叫 [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes){:target="_blank"} 的配色合集，里面有各种经典、常用的配色方案，来使用 Git 下载到本地。
 
@@ -79,15 +79,15 @@ drwxr-xr-x  198 biezhi  staff   6336 Nov  6 11:34 xrdb
 
 下面需要导入配色方案。
 
-![导入配色方案]({{ "/public/images/2018/11/import_color_schemes.png" | prepend: site.cdnurl }} "导入配色方案")
+![导入配色方案]({{ "/public/images/2018/11/import_color_schemes.png" | relative_url }} "导入配色方案")
 
-![导入配色方案]({{ "/public/images/2018/11/choose_color_schemes.png" | prepend: site.cdnurl }} "导入配色方案")
+![导入配色方案]({{ "/public/images/2018/11/choose_color_schemes.png" | relative_url }} "导入配色方案")
 
 > 选择 `schemes` 文件夹内的所有配色方案。
 
 导入成功后就可以选择一些流行的配色方案了。
 
-![选择配色方案]({{ "/public/images/2018/11/select_color_scheme.png" | prepend: site.cdnurl }} "选择配色方案")
+![选择配色方案]({{ "/public/images/2018/11/select_color_scheme.png" | relative_url }} "选择配色方案")
 
 选择配色后再去你的 iTerm 里面看会发现，已经好看了那么一点。
 
@@ -95,11 +95,11 @@ drwxr-xr-x  198 biezhi  staff   6336 Nov  6 11:34 xrdb
 
 为什么要安装字体呢？我们电脑的字体其实是可以用的，但是想要图标的这种字体就没法儿了：
 
-<img src='{{ "/public/images/2018/11/hack_font.png" | prepend: site.cdnurl }}'  alt="iTerm2 设置" width="70%"/>
+<img src='{{ "/public/images/2018/11/hack_font.png" | relative_url }}'  alt="iTerm2 设置" width="70%"/>
 
 而这些图标字体其实是非 `ASCII` 码字体，在 iTerm2 中可以进行配置，所以先要安装这个字体。这款字体叫 [nerd-fonts](https://github.com/ryanoasis/nerd-fonts){:target="_blank"}，它支持下面这么多种图标。
 
-![nerd-fonts]({{ "/public/images/2018/11/sankey-glyphs-combined-diagram.svg" | prepend: site.cdnurl }} "nerd-fonts")
+![nerd-fonts]({{ "/public/images/2018/11/sankey-glyphs-combined-diagram.svg" | relative_url }} "nerd-fonts")
 
 使用 brew 安装
 
@@ -114,9 +114,9 @@ brew cask install font-hack-nerd-font
 
 安装成功后需要在 iTerm2 中配置一下，在 `iTerm2 -> Preferences -> Profiles -> Text -> Font -> Change Font` 栏位中，Text 下面勾选 `Use a different font for non-ASCII text`，然后在 `Non-ASCII font` 点击 `Change font` 修改：
 
-![设置字体]({{ "/public/images/2018/11/settings_hack_font.png" | prepend: site.cdnurl }} "设置字体")
+![设置字体]({{ "/public/images/2018/11/settings_hack_font.png" | relative_url }} "设置字体")
 
-![选择字体]({{ "/public/images/2018/11/choose_font.png" | prepend: site.cdnurl }} "选择字体")
+![选择字体]({{ "/public/images/2018/11/choose_font.png" | relative_url }} "选择字体")
 
 这里选择的字体是非 ASCII 码字符的字体，不要设置错了！选择好之后关闭即可。
 
@@ -126,7 +126,7 @@ brew cask install font-hack-nerd-font
 brew install zsh
 ```
 
-![安装 zsh]({{ "/public/images/2018/11/install_zsh.png" | prepend: site.cdnurl }} "安装 zsh")
+![安装 zsh]({{ "/public/images/2018/11/install_zsh.png" | relative_url }} "安装 zsh")
 
 默认的 shell 是 bash，需要修改为 zsh：
 
@@ -145,7 +145,7 @@ chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
-![安装 oh-my-zsh]({{ "/public/images/2018/11/install_oh_my_zsh.png" | prepend: site.cdnurl }} "安装 oh-my-zsh")
+![安装 oh-my-zsh]({{ "/public/images/2018/11/install_oh_my_zsh.png" | relative_url }} "安装 oh-my-zsh")
 
 安装好之后可以看到界面发生了一点点变化，同时会产生一个名为 `.zshrc` 的配置文件，在用户家目录下面，我们以后主要就是修改它了。
 
@@ -161,7 +161,7 @@ ZSH_THEME="robbyrussell"
 
 为了实现前面想要的酷炫的终端主题，有人写了一个名为 [powerlevel9k](https://github.com/bhilburn/powerlevel9k){:target="_blank"} 的高颜值主题。
 
-![nerd-fonts]({{ "/public/images/2018/11/powerlevel9k.gif" | prepend: site.cdnurl }} "nerd-fonts")
+![nerd-fonts]({{ "/public/images/2018/11/powerlevel9k.gif" | relative_url }} "nerd-fonts")
 
 看到这么骚的操作，赶紧来安装吧！先将主题下载到本地的主题目录中：
 
@@ -183,7 +183,7 @@ source ~/.zshrc
 
 现在来看看终端变成什么样子了！
 
-![powerlevel9k]({{ "/public/images/2018/11/powerlevel9k.png" | prepend: site.cdnurl }} "powerlevel9k")
+![powerlevel9k]({{ "/public/images/2018/11/powerlevel9k.png" | relative_url }} "powerlevel9k")
 
 > 我这里 iTerm2 的代码配色选择的是：**Dracula**
 
@@ -204,7 +204,7 @@ POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 现在它变成这样了
 
-![simple powerlevel9k]({{ "/public/images/2018/11/simple_powerlevel9k.png" | prepend: site.cdnurl }} "simple powerlevel9k")
+![simple powerlevel9k]({{ "/public/images/2018/11/simple_powerlevel9k.png" | relative_url }} "simple powerlevel9k")
 
 更详细的配置可以参考 [Prompt Customization](https://github.com/bhilburn/powerlevel9k#prompt-customization){:target="_blank"} 和 [Stylizing Your Prompt](https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt){:target="_blank"}。
 
@@ -285,7 +285,7 @@ brew install zsh-autosuggestions
 
 [colors](https://github.com/athityakumar/colorls){:target="_blank"} 是一个 Ruby 实现的脚本，它可以配合 powerlevel9k 显示电脑上的文件图标（应该是通过后缀判断的），使用的效果如下：
 
-![colors]({{ "/public/images/2018/11/colors.png" | prepend: site.cdnurl }} "colors")
+![colors]({{ "/public/images/2018/11/colors.png" | relative_url }} "colors")
 
 安装后就可以使用了
 
@@ -304,7 +304,7 @@ gem install colorls
 
 这样配置后打开 VSCode 就变成这幅样子：
 
-<img src='{{ "/public/images/2018/11/vscode_font.png" | prepend: site.cdnurl }}'  alt="vscode 字体错误" width="450px"/>
+<img src='{{ "/public/images/2018/11/vscode_font.png" | relative_url }}'  alt="vscode 字体错误" width="450px"/>
 
 如何修复呢？只需要在 vscode 的配置文件中加入下面的配置：
 
@@ -315,4 +315,4 @@ gem install colorls
 
 这样就会变成下面这个样子了。
 
-<img src='{{ "/public/images/2018/11/vscode_new_font.png" | prepend: site.cdnurl }}'  alt="修复 vscode 字体" width="450px"/>
+<img src='{{ "/public/images/2018/11/vscode_new_font.png" | relative_url }}'  alt="修复 vscode 字体" width="450px"/>

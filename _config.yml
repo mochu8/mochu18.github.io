@@ -1,83 +1,47 @@
-title: 编程和酒
-url: https://blog.biezhi.me
-baseurl: ''
-cdnurl: 'https://blog-biezhi-me-1251171175.cos.ap-shanghai.myqcloud.com'
-description: >
-  关于编程、人生、认知和我的思想。
+title: mochu8 的技术博客
+url: https://mochu8.github.io
+baseurl: ""
+description: 记录编程、工具实践与持续学习。
+lang: zh-CN
+timezone: Asia/Shanghai
+repository: mochu8/mochu8.github.io
 
 permalink: /:year/:month/:title.html
 
 image: /public/images/mountains.jpg
-color: '#dc322f'
-google_analytics: 
-baidu_analytics: 2209f3e596f3e0c61a293f49a2f65ba3
-disqus: blog-biezhi-me
+color: "#c43d36"
 
 markdown: kramdown
 highlighter: rouge
 paginate: 12
-paginate_path: "/page/:num"
+paginate_path: "/page/:num/"
 
-# 作者信息
 author:
-  name: biezhi
-  email: biezhi.me@gmail.com
-  photo: /public/images/avatar.jpeg
+  name: mochu8
+  photo: /public/images/avatar-mochu8.jpg
 
-# 社交信息
 socials:
-  - title: Github
+  - title: GitHub
     icon: github-logo
-    url: https://github.com/FForeverand
-  - title: Twitter
-    icon: twitter
-    url: https://twitter.com/FForeverand
+    url: https://github.com/mochu8
 
-
-# 友链
-links:
-  - title: seoui
-    url: http://blog.seoui.com/
-  - title: Data羊
-    url: http://www.datayang.com/
-  - title: HongQuan'Blog
-    url: https://www.devtool.top/
-  - title: 二三克
-    url: https://same.blog/
-  - title: vzardlloo
-    url: https://vzardlloo.github.io/
-  - title: Bakumon
-    url: https://bakumon.me/blog
-  - title: sunzhenyu
-    url: https://sunzhenyu.net/
-  - title: 代码和段子手
-    url: http://codefun007.xyz/
-  - title: hweining's garden
-    url: https://hweining.online/
-  - title: Bakumon
-    url: https://bakumon.me/blog/
-  - title: 练涛
-    url: https://blog.liantao.me/
-  - title: Printf520
-    url: https://printf520.com/
-  - title: biezhi
-    url: https://blog.biezhi.me/
-
-# html 压缩
 compress_html:
   clippings: all
   comments: ["<!--", "-->"]
   endings: all
   startings: [html, head, body]
 
-# sass 解析
 sass:
   sass_dir: public/css
   style: compressed
 
-# 插件
 plugins:
   - jekyll-paginate
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

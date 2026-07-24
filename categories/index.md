@@ -1,36 +1,25 @@
 ---
-title: 
+title: 分类
 layout: page
 permalink: categories.html
+image: /public/images/skyline.jpg
+order: 2
 ---
 
-<div id='tag_cloud'>
+<div class="taxonomy-cloud" aria-label="全部分类">
 {% for cat in site.categories %}
-<a href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] }} ({{ cat[1].size }})</a>
+  <a href="#{{ cat[0] | escape }}">{{ cat[0] }} <span>{{ cat[1].size }}</span></a>
 {% endfor %}
 </div>
 
 <ul class="listing">
 {% for cat in site.categories %}
-  <li class="listing-seperator" id="{{ cat[0] }}">{{ cat[0] }}</li>
-{% for post in cat[1] %}
+  <li class="listing-seperator" id="{{ cat[0] | escape }}">{{ cat[0] }}</li>
+  {% for post in cat[1] %}
   <li class="listing-item">
-  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%Y-%m-%d' }}</time>
+    <a href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title }}</a>
   </li>
-{% endfor %}
+  {% endfor %}
 {% endfor %}
 </ul>
-
-<script src="{{ site.baseurl }}/public/js/jquery.min.js" type="text/javascript" charset="utf-8"></script> 
-<script src="{{ site.baseurl }}/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
-<script language="javascript">
-$.fn.tagcloud.defaults = {
-    size: {start: 1, end: 1, unit: 'em'},
-      color: {start: '#f8e0e6', end: '#ff3333'}
-};
-
-$(function () {
-    $('#tag_cloud a').tagcloud();
-});
-</script>

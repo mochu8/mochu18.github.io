@@ -3,7 +3,7 @@ layout: compress
 ---
 
 <!DOCTYPE html>
-<html lang="zh-hans">
+<html lang="zh-CN">
 
 {% include head.html %}
 
@@ -11,13 +11,15 @@ layout: compress
 
   <main class="content container">
     {{content}}
+    <footer class="site-footer">
+      <span>&copy; {{ site.time | date: '%Y' }} mochu8</span>
+      <a href="https://github.com/mochu8/mochu8.github.io" target="_blank" rel="noopener noreferrer">网站源码</a>
+    </footer>
   </main>
 
   {% include sidebar.html %}
 
-  <script src="{{ '/public/js/drawer.min.js' | prepend: site.cdnurl }}"></script>
-
-  {% include jsblock.html %}
+  <script src="{{ '/public/js/drawer.min.js' | relative_url }}"></script>
 
 </body>
 

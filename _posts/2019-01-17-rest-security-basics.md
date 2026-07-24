@@ -28,7 +28,7 @@ REST 是一种现代架构风格，它定义了一种设计 Web 服务的新方�
 
 现在假设每秒有 3k 个请求，在 Facebook 的系统中每秒 300k 请求更现实。将这请求乘以四，结果是每秒要向服务器发出 12k 次调用。
 
-![Basic认证]({{ "/public/images/2019/01/baseline_architecture_1.jpg" | prepend: site.cdnurl }} "Basic 认证" )
+![Basic认证]({{ "/public/images/2019/01/baseline_architecture_1.jpg" | relative_url }} "Basic 认证" )
 
 **总结：**可伸缩性差，大量的额外流量（额外调用）没有带来业务价值，服务器的负载很大。
 
@@ -44,7 +44,7 @@ OAuth 2.0 标准取代了基本的身份验证方法，它具有一定的优势�
 
 假设有效期是一天。这意味着登录服务器上的负载要少得多，因为用户每天只需要输入一次凭证，而不是每次都要进入系统。但是，系统仍需要验证每个令牌并检查用户角色的存储状态。所以我们最终还要调用身份验证服务器。
 
-![OAuth2认证]({{ "/public/images/2019/01/OAuth2-Password_Grant_2.jpg" | prepend: site.cdnurl }} "OAuth2 认证" )
+![OAuth2认证]({{ "/public/images/2019/01/OAuth2-Password_Grant_2.jpg" | relative_url }} "OAuth2 认证" )
 
 **总结：**和 Basic 验证有相同的问题 - 可伸缩性差，身份验证服务器负载较高。
 
@@ -54,7 +54,7 @@ OAuth 2.0 标准取代了基本的身份验证方法，它具有一定的优势�
 
 **工作原理：**当用户第一次使用用户名和密码登录系统时，系统不仅会返回一个访问令牌（只是一个字符串），而是一个包含所有用户信息的 JSON 对象，比如角色和权限，使用 Base64 进行编码并使用私钥签名。下图是它在没有编码的情况下的样子：
 
-![JWT认证]({{ "/public/images/2019/01/encodedvs.decoded_4.jpg" | prepend: site.cdnurl }} "JWT 认证" )
+![JWT认证]({{ "/public/images/2019/01/encodedvs.decoded_4.jpg" | relative_url }} "JWT 认证" )
 
 看起来很可怕，但这确实有效！主要区别在于我们可以在令牌中存储状态，而服务保持无状态。这意味着用户自己拥有自己的信息，不需要额外的调用来检查它，因为所有的内容都在令牌里。这对于减少服务器负载方面是一个很大的优势。这个标准在世界范围内得到广泛应用。
 

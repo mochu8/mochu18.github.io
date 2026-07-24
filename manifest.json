@@ -1,22 +1,16 @@
 {
-    "short_name": "魔王不造反",
-    "name": "王爵的技术博客",
-    "icons": [{
-            "src": "/public/images/icons/launcher-icon-128x128.png",
-            "type": "image/png",
-            "sizes": "128x128"
-        },
-        {
-            "src": "/public/images/icons/launcher-icon-152x152.png",
-            "type": "image/png",
-            "sizes": "152x152"
-        },
-        {
-            "src": "/public/images/icons/launcher-icon-192x192.png",
-            "type": "image/png",
-            "sizes": "192x192"
-        }
-    ],
-    "start_url": "/?utm_source=homescreen",
-    "display": "standalone"
+  "name": "mochu8 的技术博客",
+  "short_name": "mochu8",
+  "lang": "zh-CN",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c43d36",
+  "icons": [
+    {
+      "src": "/public/images/avatar-mochu8.jpg",
+      "type": "image/jpeg",
+      "sizes": "256x256"
+    }
+  ]
 }

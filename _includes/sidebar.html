@@ -1,59 +1,53 @@
 {% assign image = page.image %}
 
 {% unless image %}
-{% if page.tag %}
-{% assign tag = site.data.tags[page.tag] %}
-{% else %}
-{% if page.tags.size > 0 %}
-{% assign tag_name = page.tags[0] %}
-{% assign tag = site.data.tags[tag_name] %}
-{% endif %}
-{% endif %}
+  {% if page.tag %}
+    {% assign tag = site.data.tags[page.tag] %}
+  {% elsif page.tags.size > 0 %}
+    {% assign tag_name = page.tags[0] %}
+    {% assign tag = site.data.tags[tag_name] %}
+  {% endif %}
 {% endunless %}
 
 {% unless image %}
-{% assign image = site.image %}
+  {% assign image = site.image %}
 {% endunless %}
 
-<div id="_backdrop"></div>
-<a id="_menu" href="#_sidebar">☰</a>
+<div id="_backdrop" aria-hidden="true"></div>
+<a id="_menu" href="#_sidebar" aria-label="打开导航" aria-controls="_sidebar">
+  <span class="icon czs-menu-l" aria-hidden="true"></span>
+</a>
 
-<aside id="_sidebar" class="sidebar" {% if image %}style="background-image:url('{{ image | prepend: site.cdnurl}}')" {%
-  endif %}>
+<aside id="_sidebar" class="sidebar" {% if image %}style="background-image: url('{{ image | relative_url }}')"{% endif %}>
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
       <h1>
-        <a href="{{ site.baseurl }}" title="{{site.title}}">
-          <img src="{{ '/public/images/logo-white.png' | prepend: site.cdnurl }}" alt="{{site.title}}">
-        </a>
+        <a href="{{ '/' | relative_url }}" title="{{ site.title }}">mochu8</a>
       </h1>
-      {{site.description | markdownify}}
+      {{ site.description | markdownify }}
     </div>
 
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="{{site.baseurl}}/">主页</a>
-      {% comment %}
-      The code below dynamically generates a sidebar nav of pages with
-      `layout: page` in the front-matter. See readme for usage.
-      {% endcomment %}
-
+    <nav class="sidebar-nav" aria-label="主导航">
+      <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="{{ '/' | relative_url }}">主页</a>
       {% assign pages_list = site.pages | sort: "order" %}
       {% for node in pages_list %}
-      {% if node.title != null %}
-      {% if node.layout == "page" %}
-      <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}"
-        href="{{node.url | prepend:site.baseurl}}">{{node.title}}</a>
-      {% endif %}
-      {% endif %}
+        {% if node.title != null and node.layout == "page" %}
+          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}"
+            href="{{ node.url | relative_url }}">{{ node.title }}</a>
+        {% endif %}
       {% endfor %}
     </nav>
 
     <div class="sidebar-social">
       {% for item in site.socials %}
-      <a href="{{ item.url }}" title="{{item.title}}" target="_blank" data-no-instant><span
-          class="icon czs-{{item.icon}}"></span></a>
+        <a href="{{ item.url }}" title="{{ item.title }}" aria-label="{{ item.title }}" target="_blank"
+          rel="noopener noreferrer">
+          <span class="icon czs-{{ item.icon }}" aria-hidden="true"></span>
+        </a>
       {% endfor %}
-      <a href="{{site.baseurl}}/feed.xml"><span class="icon czs-rss"></span></a>
+      <a href="{{ '/feed.xml' | relative_url }}" title="RSS" aria-label="RSS">
+        <span class="icon czs-rss" aria-hidden="true"></span>
+      </a>
     </div>
   </div>
 </aside>

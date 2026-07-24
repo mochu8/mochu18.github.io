@@ -24,7 +24,7 @@ tags: ['golang', '命令行']
 
 我们在开始之前先要准备 Go 语言的环境，如果你已经安装过了这步可以略过。你可以在 [这里](https://golang.org/dl/){:target="_blank"} 下载到最新版的 Go 语言版本，如果你的网络环境被迫是下面这个样子。
 
-![timeout]({{ "/public/images/2017/11/p3f4ktao8kjmaro78unjugogs5.png" | prepend: site.cdnurl }} "timeout")
+![timeout]({{ "/public/images/2017/11/p3f4ktao8kjmaro78unjugogs5.png" | relative_url }} "timeout")
 
 你可以在 [Golang中国](https://golangtc.com/download){:target="_blank"} 下载最新发布包。Go 语言环境的安装方式也有好几种，我们选择最简单的方式：**标准包安装**。
 

@@ -17,7 +17,7 @@ write(socket, tmp_buf, len);
 
 这个例子看起来非常简单，你可能会认为只有两次系统调用不会产生太多的系统开销。实际上并非如此，在这两次调用之后，数据至少被拷贝了 4 次，同时还执行了很多次 *用户态/内核态* 的上下文切换。（实际上这个过程是非常复杂的，为了解释我尽可能保持简单）为了更好的理解这个过程，请查看下图中的上下文切换，图片上部分展示上下文切换过程，下部分展示拷贝操作。
 
-![两次系统调用]({{ "/public/images/2019/01/sys_call_copy.jpg" | prepend: site.cdnurl }} "两次系统调用")
+![两次系统调用]({{ "/public/images/2019/01/sys_call_copy.jpg" | relative_url }} "两次系统调用")
 
 1. 程序调用 `read` 产生一次用户态到内核态的上下文切换。DMA 模块从磁盘读取文件内容，将其拷贝到内核空间的缓冲区，完成第 1 次拷贝。
 2. 数据从内核缓冲区拷贝到用户空间缓冲区，之后系统调用 `read` 返回，这回导致从内核空间到用户空间的上下文切换。这个时候数据存储在用户空间的 `tmp_buf` 缓冲区内，可以后续的操作了。
@@ -37,7 +37,7 @@ write(socket, tmp_buf, len);
 
 为了方便你理解，请参考下图的过程。
 
-![mmap调用]({{ "/public/images/2019/01/sys_mmap.jpg" | prepend: site.cdnurl }} "mmap 调用")
+![mmap调用]({{ "/public/images/2019/01/sys_mmap.jpg" | relative_url }} "mmap 调用")
 
 1. `mmap` 调用导致文件内容通过 DMA 模块拷贝到内核缓冲区。然后与用户进程共享缓冲区，这样不会在内核缓冲区和用户空间之间产生任何拷贝。
 2. `write` 调用导致内核将数据从原始内核缓冲区拷贝到与 `socket` 关联的内核缓冲区中。
@@ -73,7 +73,7 @@ sendfile(socket, file, len);
 
 同样的，为了理解起来方便，可以看下图的调用过程。
 
-![sendfile代替读写]({{ "/public/images/2019/01/sys_sendfile.jpg" | prepend: site.cdnurl }} "sendfile 代替读写")
+![sendfile代替读写]({{ "/public/images/2019/01/sys_sendfile.jpg" | relative_url }} "sendfile 代替读写")
 
 1. `sendfile` 调用会使得文件内容通过 DMA 模块拷贝到内核缓冲区。然后，内核将数据拷贝到与 `socket` 关联的内核缓冲区中。
 2. 第 3 次拷贝发生在 DMA 模块将数据从内核 `socket` 缓冲区传递到协议引擎时。
@@ -90,7 +90,7 @@ sendfile(socket, file, len);
 
 为了更好地了解所涉及的过程，请查看下图
 
-![sendfile代替读写]({{ "/public/images/2019/01/sys_call_sendfile.jpg" | prepend: site.cdnurl }} "sendfile 代替读写")
+![sendfile代替读写]({{ "/public/images/2019/01/sys_call_sendfile.jpg" | relative_url }} "sendfile 代替读写")
 
 1. `sendfile` 调用会导致文件内容通过 DMA 模块拷贝到内核缓冲区。
 2. 没有数据被复制到 `socket` 缓冲区。相反，只有关于数据的位置和长度信息的描述符被附加到 `socket` 缓冲区。DMA 模块将数据直接从内核缓冲区传递到协议引擎，从而避免了剩余的最终拷贝。

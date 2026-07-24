@@ -50,7 +50,7 @@ b = 4
 
 `int` 是一个基本类型，我们将 2 个变量的值传入到 `swap` 方法中，它们实际的结构是这样的：
 
-<img src='{{ "/public/images/2018/11/pass_by_value_1.png" | prepend: site.cdnurl }}'  alt="iTerm2 设置" width="350px"/>
+<img src='{{ "/public/images/2018/11/pass_by_value_1.png" | relative_url }}'  alt="iTerm2 设置" width="350px"/>
 
 ## 引用类型的例子
 
@@ -88,7 +88,7 @@ FiFi
 
 对于 `change` 方法接收到的 `name` 是 Jerry 我们可以理解，修改后方法内输出的 FiFi 也可以理解，因为在同一函数体内，变量的修改必然是可见的。需要解释的就是外部的修改也会发生变化，这是为啥呢？
 
-<img src='{{ "/public/images/2018/11/pass_by_value_2.png" | prepend: site.cdnurl }}'  alt="iTerm2 设置" width="600px"/>
+<img src='{{ "/public/images/2018/11/pass_by_value_2.png" | relative_url }}'  alt="iTerm2 设置" width="600px"/>
 
 看了这幅图你大概就明白了，我们 `new Foo("Jerry")` 这句话会在堆上开辟一块内存空间，假设叫它 `0xabcd` 好了，把这块内存赋值给一个名为 `foo` 的引用类型。进入 `change` 方法的时候就会传递一份 `foo` 引用类型的拷贝（参数入栈），我故意把这个变量名写为 `myfoo` 防止大家理解错误，`myfoo` 和 `foo` 这 2 个引用类型都指向同一块堆内存空间，在 `change` 方法内通过 `myfoo` 修改的值也会影响到其他指向这块内存的引用类型。
 

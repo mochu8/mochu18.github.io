@@ -168,7 +168,7 @@ Host yourserver
 我经常会用到Github提交，拉取代码，总不能每次都输入用户名和密码吧。。
 于是在Github上添加我自己的公钥即可
 
-![Github添加SSH公钥]({{ "/public/images/2017/08/ssh-key-github.png" | prepend: site.cdnurl }} "Github添加SSH公钥")
+![Github添加SSH公钥]({{ "/public/images/2017/08/ssh-key-github.png" | relative_url }} "Github添加SSH公钥")
 
 配置完成后从你自己仓库的提交、拉取等操作就不用再输密码了。
 

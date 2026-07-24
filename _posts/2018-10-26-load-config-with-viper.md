@@ -105,7 +105,7 @@ _(#‵′)靠，你怎么这么多事儿。。。我不干了。_
 
 这些库无疑都是优秀的，但它们更像是一些小工具，在 Github 上的 star 数也都较低。那么 Viper 是什么呢？
 
-![viper]({{ "/public/images/2018/10/viper.png" | prepend: site.cdnurl }} "viper")
+![viper]({{ "/public/images/2018/10/viper.png" | relative_url }} "viper")
 
 viper 的 Github 是：[https://github.com/spf13/viper](https://github.com/spf13/viper){:target="_blank"}
 

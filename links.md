@@ -1,23 +1,22 @@
 ---
 layout: page
-title: 友链
-permalink: links.html
+title: 项目
+permalink: projects.html
 image: /public/images/links.jpeg
-order: 4
+order: 3
 ---
 
-> God made relatives. Thank God we can choose our friends.
-
-<ul class="links">
-{% for item in site.links %}
-<li>
-    <p>
-        <a href="{{ item.url }}" target="_blank" title="{{ site.title }}">
-        {{ item.title }}
-        </a>
-    </p>
-</li>
-{% endfor %}
-</ul>
-
-经常更新博文可交换友链接，不定期对无法访问的网址进行清理，请保证自己的链接长期有效。
+<div class="project-list">
+  <article class="project-item">
+    <p class="project-kicker">WEB TOOL</p>
+    <h2>Telegram 机器人工具箱</h2>
+    <p>在浏览器中生成 Bot API 请求地址，处理机器人信息和 Webhook 配置。</p>
+    <a href="{{ '/telegram-tools.html' | relative_url }}">打开工具</a>
+  </article>
+  <article class="project-item">
+    <p class="project-kicker">SOURCE CODE</p>
+    <h2>mochu8.github.io</h2>
+    <p>这个网站的 Jekyll 源码、文章和更新记录。</p>
+    <a href="https://github.com/mochu8/mochu8.github.io" target="_blank" rel="noopener noreferrer">查看仓库</a>
+  </article>
+</div>

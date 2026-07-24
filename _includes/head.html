@@ -1,23 +1,13 @@
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ site.color }}">
   {% seo %}
-  <link rel="stylesheet" href="{{ '/public/css/styles.css' | prepend: site.cdnurl }}">
-  <link rel="stylesheet" href="{{ '/public/plugins/fancybox/jquery.fancybox.min.css' | prepend: site.cdnurl }}"
-    media="all">
-  <link rel="stylesheet" href="{{ '/public/fonts/caomei/style.css' }}" media="all">
+  <link rel="stylesheet" href="{{ '/public/css/styles.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/public/fonts/caomei/style.css' | relative_url }}">
   {% include head_css.html %}
-  <!-- Icons -->
-  <link rel="icon" type="image/jpeg"
-    href="{{ '/public/images/icons/launcher-icon-128x128.jpeg' | prepend: site.cdnurl }}">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144"
-    href="{{ '/public/images/icons/launcher-icon-152x152.jpeg' | prepend: site.cdnurl }}">
-  <!-- RSS -->
-  <link rel="alternate" type="application/feed+xml" title="{{site.title}}" href="{{site.baseurl}}/feed.xml">
-  <link rel="manifest" href="/manifest.json">
-  <script src="{{ '/public/js/jquery.min.js' | prepend: site.cdnurl }}"></script>
-  <script src="{{ '/public/js/highlight.min.js' | prepend: site.cdnurl }}"></script>
-  <script src="{{ '/public/plugins/fancybox/jquery.fancybox.min.js' | prepend: site.cdnurl }}"></script>
-  {% include google_analytics.html %}
-  {% include baidu_analytics.html %}
+  <link rel="icon" type="image/jpeg" href="{{ site.author.photo | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ site.author.photo | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
 </head>
